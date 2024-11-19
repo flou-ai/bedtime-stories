@@ -3,6 +3,7 @@
 	import { goto, invalidateAll } from '$app/navigation';
 	import { tick } from 'svelte';
 	import type { PageData } from './$types';
+	import { format } from 'timeago.js';
 
 	export let data: PageData;
 	let loading = false;
@@ -26,6 +27,14 @@
 		// go to last story
 		goto(`/stories/${ltm.state.stories.length - 1}`);
 	};
+
+	const formatDate = (date: string) => {
+		return new Date(date).toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		});
+	};
 </script>
 
 <div class="flex flex-wrap justify-between items-center align-center gap-y-4 gap-x-4">
@@ -47,14 +56,18 @@
 {#if stories.length === 0}
 	<p class="text-center py-8">No stories yet. Click the button above to create your first story!</p>
 {:else}
-	<div class="grid gap-4">
-		{#each stories.reverse() as story, i}
-			<a
-				href={`/stories/${stories.length - 1 - i}`}
-				class="card p-4 space-y-4">
-				<h3 class="h3">{story.title}</h3>
-				<p class="line-clamp-3">{story.summary}</p>
-			</a>
+	<div class="grid gap-20 !my-20">
+		{#each stories.slice().reverse() as story, i}
+			<div class="text-justify mx-auto max-w-65ch">
+				<div title={formatDate(story.date)}>{format(story.date)}</div>
+				<a href={`/stories/${stories.length - 1 - i}`} class="">
+					<h3 class="h3">{story.title}</h3>
+					<p class="line-clamp-3 prose dark:prose-invert ">{story.summary}</p>
+				</a>
+				<div class="flex flex-wrap justify-end gap-y-4">
+					<button class="btn !p-0" on:click={() => goto('/stories')}> Continue Story → </button>
+				</div>
+			</div>
 		{/each}
 	</div>
 {/if}

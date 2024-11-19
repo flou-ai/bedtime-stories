@@ -27,7 +27,7 @@
 <div class="min-h-screen">
 	<header class="sticky top-0 z-10 backdrop-blur-sm p-4">
 		<nav class="container mx-auto flex flex-wrap items-center justify-between">
-			<strong class="text-xl uppercase">Bedtime Stories</strong>
+			<a href="/" class="text-xl uppercase font-bold">Bedtime Stories</a>
 
 			<!-- Hamburger button -->
 			<button class="lg:hidden p-2" on:click={toggleMenu} aria-label="Toggle menu">

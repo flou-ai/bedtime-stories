@@ -8,7 +8,7 @@
 
 	onMount(() => {
 		console.log(data);
-		if (!ltm.state.settings) {
+		if (!ltm.state.writing_instructions) {
 			goto('/welcome');
 		} else {
 			goto('/stories');

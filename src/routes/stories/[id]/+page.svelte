@@ -12,7 +12,7 @@
 	<button class="btn !p-0" on:click={() => goto('/stories')}> ← Back to Stories </button>
 </div>
 
-<div class="prose dark:prose-invert !my-20">
+<div class="prose dark:prose-invert !my-20 text-justify mx-auto">
 	{#each story.content.split('\n') as paragraph}
 		<p>{paragraph}</p>
 	{/each}
@@ -21,4 +21,5 @@
 
 <div class="flex flex-wrap justify-between items-center align-center gap-y-4 !mb-20">
 	<button class="btn !p-0" on:click={() => goto('/stories')}> ← Back to Stories </button>
+	<button class="btn !p-0" on:click={() => goto('/stories')}> Continue Story → </button>
 </div>
