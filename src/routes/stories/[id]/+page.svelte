@@ -7,17 +7,18 @@
 	$: story = ltm.state.stories[params.id];
 </script>
 
-<div class="container mx-auto p-4 space-y-8">
-	<div class="flex justify-between items-center">
-		<h1 class="h1">Story #{params.id + 1}</h1>
-		<button class="btn variant-ghost" on:click={() => goto('/stories')}> Back to Stories </button>
-	</div>
+<div class="flex flex-wrap justify-between items-center align-center gap-y-4">
+	<h1 class="h1">{story.title}</h1>
+	<button class="btn !p-0" on:click={() => goto('/stories')}> ← Back to Stories </button>
+</div>
 
-	<div class="card p-6">
-        <div class="prose max-w-none">
-            {#each story.split('\n') as paragraph}
-                <p>{paragraph}</p>
-            {/each}
-        </div>
-	</div>
+<div class="prose dark:prose-invert !my-20">
+	{#each story.content.split('\n') as paragraph}
+		<p>{paragraph}</p>
+	{/each}
+</div>
+
+
+<div class="flex flex-wrap justify-between items-center align-center gap-y-4 !mb-20">
+	<button class="btn !p-0" on:click={() => goto('/stories')}> ← Back to Stories </button>
 </div>

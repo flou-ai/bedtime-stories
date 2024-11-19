@@ -28,35 +28,33 @@
 	};
 </script>
 
-<div class="container mx-auto p-4 space-y-8">
-	<div class="flex justify-between items-center">
-		<h1 class="h1">Your Stories</h1>
-		<button class="btn variant-filled" on:click={handleCreateStory} disabled={loading}>
+<div class="flex flex-wrap justify-between items-center align-center gap-y-4 gap-x-4">
+	<h1 class="h1">Bedtime Stories</h1>
+	<div class="flex flex-wrap gap-4">
+		<button class="btn variant-outline-primary" on:click={handleCreateStory} disabled={loading}>
 			{#if loading}
 				Creating story...
 			{:else}
 				Create New Story
 			{/if}
 		</button>
+		<button class="btn variant-outline-primary" on:click={() => goto('/instructions')}>
+			Modify stories instructions
+		</button>
 	</div>
-
-	{#if stories.length === 0}
-		<p class="text-center py-8">
-			No stories yet. Click the button above to create your first story!
-		</p>
-	{:else}
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-			{#each stories as story, i}
-				<div class="card p-4 space-y-4">
-					<h3 class="h3">Story {i + 1}</h3>
-					<p class="line-clamp-3">{story}</p>
-					<div class="flex justify-end">
-						<button class="btn variant-ghost" on:click={() => goto(`/stories/${i}`)}>
-							Read More
-						</button>
-					</div>
-				</div>
-			{/each}
-		</div>
-	{/if}
 </div>
+
+{#if stories.length === 0}
+	<p class="text-center py-8">No stories yet. Click the button above to create your first story!</p>
+{:else}
+	<div class="grid gap-4">
+		{#each stories.reverse() as story, i}
+			<a
+				href={`/stories/${stories.length - 1 - i}`}
+				class="card p-4 space-y-4">
+				<h3 class="h3">{story.title}</h3>
+				<p class="line-clamp-3">{story.summary}</p>
+			</a>
+		{/each}
+	</div>
+{/if}
